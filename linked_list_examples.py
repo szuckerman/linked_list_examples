@@ -1,11 +1,10 @@
-# Linked Lists in Python
 
 class Node:
 	def __init__(self, data, next_node=None):
 		self.data = data
 		self.next_node = next_node
 	def __repr__(self):
-		return("<DATA: %s>" % str(self.data))
+		return "<DATA: %s>" % str(self.data)
 
 
 A = Node(1)
@@ -17,10 +16,12 @@ TAIL = B
 A.next_node=B
 
 C = Node(3)
+D = Node(4)
+E = Node(5)
 
-
-# Print all elements
-def printAllNode():
+def printAllNodes():
+	'''This function prints all the elements of a linked list.
+	We assume that the linked list is in the global environment.'''
 	current_node = HEAD
 	while current_node.next_node is not None:
 		print(current_node)
@@ -28,26 +29,23 @@ def printAllNode():
 	print(current_node)
 
 
-# Insert an element
-
-	## As the HEAD
-temp_node = HEAD
-HEAD = C
-HEAD.next_node = temp_node
-
-	## after the HEAD
-temp_node = HEAD.next_node
-HEAD.next_node = C
-HEAD.next_node.next_node = temp_node
+def insertAsHead(inserted_node):
+	inserted_node = HEAD
+	HEAD = C
+	HEAD.next_node = inserted_node
 
 
-	## as the tail
+def insertAfterHead(inserted_node):
+	inserted_node = HEAD.next_node
+	HEAD.next_node = C
+	HEAD.next_node.next_node = inserted_node
+
+
 def insertAsTail(inserted_node):
 	global TAIL
 	TAIL.next_node = inserted_node
 	TAIL = inserted_node
 
-	## before the tail
 
 def insertBeforeTail(inserted_node):
 	current_node=HEAD
@@ -56,13 +54,17 @@ def insertBeforeTail(inserted_node):
 			current_node.next_node = inserted_node
 			inserted_node.next_node = TAIL
 		current_node=current_node.next_node
-		
-	## in the middle somewhere
 
 
-
-
-
-
+def insertAfterNode(inserted_node, position):
+	'''This function adds a node after a node of a given position.'''
+	count = 1
+	current_node=HEAD
+	while count < position:
+		current_node = current_node.next_node
+		count += 1
+	new_list = current_node.next_node
+	current_node.next_node = inserted_node
+	inserted_node.next_node = new_list
 
 
