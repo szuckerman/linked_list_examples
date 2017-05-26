@@ -29,16 +29,27 @@ def printAllNodes():
 	print(current_node)
 
 
+def returnAsPythonList(head_node):
+	'''This will return the Linked List in a Python list - for testing purposes.'''
+	my_list = []
+	current_node = head_node
+	my_list.append(current_node)
+	while current_node.next_node is not None:
+		current_node=current_node.next_node
+		my_list.append(current_node)
+	return my_list
+
+
 def insertAsHead(inserted_node):
-	inserted_node = HEAD
-	HEAD = C
-	HEAD.next_node = inserted_node
+	global HEAD
+	inserted_node.next_node = HEAD
+	HEAD = inserted_node
 
 
+# Need to fix this one, even though it prints correctly. Doesn't pass unittest.
 def insertAfterHead(inserted_node):
-	inserted_node = HEAD.next_node
-	HEAD.next_node = C
-	HEAD.next_node.next_node = inserted_node
+	inserted_node.next_node = HEAD.next_node
+	HEAD.next_node = inserted_node
 
 
 def insertAsTail(inserted_node):
