@@ -19,8 +19,16 @@ class LinkedList:
 		if len(self._node_set) == 2:
 			self.HEAD.next_node = self.TAIL
 	
-	def add_node(self, node):
-		self._node_set.add(node)
+	def add_node(func):
+		def decorated_func(self, node, pos=None):
+			print('%s added to set with %s function' % (node, func.__name__))
+			if pos is None:
+				func(self, node)
+			else:
+				func(self, node, pos)
+			self._node_set.add(node)
+			return True
+		return decorated_func
 	
 	def printAllNodes(self):
 		'''This function prints all the elements of a linked list.'''
@@ -33,7 +41,7 @@ class LinkedList:
 		print('Node %s: %s' % (count, current_node))
 	
 	def returnAsPythonList(self):
-		'''This will return the Linked List in a Python list - for testing purposes.'''
+		'''This will return the Linked List as a Python list - for testing purposes.'''
 		my_list = []
 		current_node = self.HEAD
 		my_list.append(current_node)
@@ -42,19 +50,23 @@ class LinkedList:
 			my_list.append(current_node)
 		return my_list
 	
+	@add_node
 	def insertAsHead(self, inserted_node):
 		inserted_node.next_node = self.HEAD
 		self.HEAD = inserted_node
-	
 	# Need to fix this one, even though it prints correctly. Doesn't pass unittest.
+	
+	@add_node
 	def insertAfterHead(self, inserted_node):
 		inserted_node.next_node = self.HEAD.next_node
 		self.HEAD.next_node = inserted_node
 	
+	@add_node
 	def insertAsTail(self, inserted_node):
 		self.TAIL.next_node = inserted_node
 		self.TAIL = inserted_node
 	
+	@add_node
 	def insertBeforeTail(self, inserted_node):
 		current_node=self.HEAD
 		while current_node.next_node is not None:
@@ -63,6 +75,7 @@ class LinkedList:
 				inserted_node.next_node = self.TAIL
 			current_node=current_node.next_node
 	
+	@add_node
 	def insertAfterNode(self, inserted_node, position):
 		'''This function adds a node after a node of a given position.'''
 		count = 1
@@ -75,25 +88,12 @@ class LinkedList:
 		inserted_node.next_node = new_list
 
 
-
-
+# Examples:
 # ll=LinkedList(HEAD=Node(1),TAIL=Node(2))
 # ll.insertBeforeTail(Node(3))
-# ll.insertAsTail(Node(4))
-
+# ll.insertAsHead(Node(4))
 # ll.printAllNodes()
 # ll.insertAfterNode(Node(5),3)
-# A = Node(1)
-# B = Node(2)
-
-# HEAD = A
-# TAIL = B
-
-# A.next_node=B
-
-# C = Node(3)
-# D = Node(4)
-# E = Node(5)
 
 
 
