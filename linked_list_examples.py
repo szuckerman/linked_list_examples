@@ -27,7 +27,6 @@ class LinkedList:
 			else:
 				func(self, node, pos)
 			self._node_set.add(node)
-			return True
 		return decorated_func
 	
 	def printAllNodes(self):
@@ -89,11 +88,11 @@ class LinkedList:
 
 
 # Examples:
-# ll=LinkedList(HEAD=Node(1),TAIL=Node(2))
-# ll.insertBeforeTail(Node(3))
-# ll.insertAsHead(Node(4))
+# ll=lle.LinkedList(HEAD=lle.Node(1),TAIL=lle.Node(2))
+# ll.insertBeforeTail(lle.Node(3))
+# ll.insertAsHead(lle.Node(4))
 # ll.printAllNodes()
-# ll.insertAfterNode(Node(5),3)
+# ll.insertAfterNode(lle.Node(5),3)
 
 
 
