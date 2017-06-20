@@ -1,8 +1,9 @@
 
 class Node:
-	def __init__(self, data, next_node=None):
+	def __init__(self, data, next_node=None, previous_node=None):
 		self.data = data
 		self.next_node = next_node
+		self.previous_node = previous_node
 	def __repr__(self):
 		return "<DATA: %s>" % str(self.data)
 
@@ -18,7 +19,7 @@ class LinkedList:
 			self._node_set.add(self.TAIL)
 		if len(self._node_set) == 2:
 			self.HEAD.next_node = self.TAIL
-	
+
 	def add_node(func):
 		def decorated_func(self, node, pos=None):
 			print('%s added to set with %s function' % (node, func.__name__))
@@ -48,6 +49,15 @@ class LinkedList:
 			current_node=current_node.next_node
 			my_list.append(current_node)
 		return my_list
+
+	def convertToDoublyLinkedList(self):
+		prior_node = self.HEAD
+		current_node = prior_node.next_node
+		current_node.previous_node=prior_node
+		while current_node.next_node is not None:
+			prior_node=current_node
+			current_node=current_node.next_node
+			current_node.previous_node=prior_node
 	
 	@add_node
 	def insertAsHead(self, inserted_node):
@@ -87,7 +97,9 @@ class LinkedList:
 		inserted_node.next_node = new_list
 
 
+
 # Examples:
+# import linked_list_examples as lle
 # ll=lle.LinkedList(HEAD=lle.Node(1),TAIL=lle.Node(2))
 # ll.insertBeforeTail(lle.Node(3))
 # ll.insertAsHead(lle.Node(4))
