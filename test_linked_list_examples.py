@@ -27,5 +27,11 @@ class LinkedListTests(unittest.TestCase):
 		self.assertEqual(self.node_3.next_node.data, previous_node.next_node.data)
 
 
+	def test_make_doubly_linked(self):
+		self.ll.insertAfterHead(self.node_3)
+		self.ll.convertToDoublyLinkedList()
+		self.assertEqual(self.ll.HEAD.data, self.node_3.previous_node.data)
+
+
 if __name__ == '__main__':
 	unittest.main()
