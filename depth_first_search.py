@@ -5,6 +5,12 @@ class Node:
 	def __repr__(self):
 		return "<Node %s>" % self.name
 
+class Tree:
+	def __init__(self, nodes=set(), HEAD=None):
+		self.nodes = nodes
+		self.HEAD = HEAD
+
+# Tree from the pluralsight.com Algorithmics Course used as an example
 
 A = Node('A')
 B = Node('B')
@@ -16,7 +22,6 @@ G = Node('G')
 H = Node('H')
 I = Node('I')
 
-
 A.nodes = [B, C]
 B.nodes = [D, E]
 C.nodes = [E, F]
@@ -26,3 +31,6 @@ F.nodes = [G, H, I]
 G.nodes = [D, E]
 H.nodes = []
 I.nodes = []
+
+node_set = {A, B, C, D, E, F, G, H, I}
+my_tree = Tree(nodes=node_set, HEAD = A)
