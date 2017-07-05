@@ -48,6 +48,7 @@ count+=1
 def traverse_tree(starting_node):
 	global count
 	for node in starting_node.nodes:
+		# If node has been visited, just go to the next node in the stack
 		if node.number is not None:
 			continue
 		# We're stacking from right to left
@@ -56,6 +57,7 @@ def traverse_tree(starting_node):
 	print("Current Stack: [%s]" % ', '.join([i.name for i in STACK]))
 	if STACK:
 		new_node=STACK.pop()
+		# Only tag nodes that haven't been visited
 		if new_node.number is None:
 			new_node.number=count
 			count+=1
